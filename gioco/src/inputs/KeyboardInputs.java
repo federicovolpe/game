@@ -29,6 +29,7 @@ public class KeyboardInputs implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
 
+        //in base alla lettera che ascolto chiamo il metodo corrispondente del gamepanel
         switch(e.getKeyCode()){
             case KeyEvent.VK_W:
                 System.out.println("premuto il tasto W");

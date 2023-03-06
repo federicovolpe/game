@@ -19,6 +19,8 @@ public class GamePanel extends JPanel {
     private int xDelta = 100;//remembers the x position of the object 
     private int yDelta = 100;//remembers the y position of the object
     private int frames = 0; //useful to see the fps of the game
+    private long lastCheck = 0;
+    private int xDir = 1, yDir = 1; //useful to indicate the direction of motion
     
     public GamePanel(){
         mouseInputs = new MouseInputs(this);
@@ -71,5 +73,26 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
         g.setColor(Color.BLACK);
         g.drawRect(xDelta, yDelta,200,50);
+        updateRectangle();
+        
+        frames++;
+        if(System.currentTimeMillis() - lastCheck >= 1000){
+            //checking if the current time - last time it went into this branch is greater than 1 sec
+            lastCheck = System.currentTimeMillis();
+            System.out.println("Fps: "+ frames);
+            frames = 0;
+        }
+    }
+
+    private void updateRectangle(){
+        xDelta += xDir;
+        if(xDelta >= 400 || xDelta < 0){
+            xDir *= -1;
+        }
+        yDelta += yDir;
+        if(xDelta >= 400 || xDelta < 0){
+            yDir *= -1;
+        }
+        yDelta++;
     }
 }
